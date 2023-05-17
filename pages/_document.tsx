@@ -1,6 +1,14 @@
-import Document, { Head, Html, Main, NextScript } from "next/document";
-
+import Document, { Head, Html, Main, NextScript,DocumentContext } from "next/document";
+import React from 'react';
+import { CssBaseline } from '@nextui-org/react';
 class MyDocument extends Document {
+  static async getInitialProps(ctx: DocumentContext) {
+    const initialProps = await Document.getInitialProps(ctx);
+    return {
+      ...initialProps,
+      styles: React.Children.toArray([initialProps.styles])
+    };
+  }
   render() {
     return (
       <Html lang="en">
@@ -30,6 +38,7 @@ class MyDocument extends Document {
             name="twitter:image"
             content="https://restore-photos.vercel.app/og-image.png"
           />
+          {CssBaseline.flush()}
         </Head>
         <body>
           <Main />
