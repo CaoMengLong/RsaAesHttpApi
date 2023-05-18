@@ -1,9 +1,8 @@
 import { NextPage } from "next";
 import Head from "next/head";
-
+import NextLink from 'next/link';
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-
 import { Container, Grid, Card, Col, Text, Row, Button } from "@nextui-org/react";
 
 const Home: NextPage = () => {
@@ -12,28 +11,26 @@ const Home: NextPage = () => {
       <Head>
         <title>企业信息安全教育系统</title>
       </Head>
-      <Header />
-      <main>
-        <Container lg>
-          <Grid.Container gap={2} justify="center">
-            <Grid xs={12} sm={4}>
-              <Card1 />
-            </Grid>
-            <Grid xs={12} sm={4}>
-              <Card2 />
-            </Grid>
-            <Grid xs={12} sm={4}>
-              <Card3 />
-            </Grid>
-            <Grid xs={12} sm={5}>
-              <Card4 />
-            </Grid>
-            <Grid xs={12} sm={7}>
-              <Card5 />
-            </Grid>
-          </Grid.Container>
-        </Container>
-      </main>
+      <Header isActive="index" />
+      <Container lg style={{ marginTop: "2rem", padding: "0px" }}>
+        <Grid.Container gap={2} justify="center">
+          <Grid xs={12} sm={4}>
+            <Card1 />
+          </Grid>
+          <Grid xs={12} sm={4}>
+            <Card2 />
+          </Grid>
+          <Grid xs={12} sm={4}>
+            <Card3 />
+          </Grid>
+          <Grid xs={12} sm={5}>
+            <Card4 />
+          </Grid>
+          <Grid xs={12} sm={7}>
+            <Card5 />
+          </Grid>
+        </Grid.Container>
+      </Container>
       <Footer />
     </div>
   );
@@ -41,46 +38,52 @@ const Home: NextPage = () => {
 
 
 const Card1 = () => (
+
   <Card isHoverable isPressable>
-    <Card.Header css={{ position: "absolute", zIndex: 1, top: 5 }}>
-      <Col>
-        <Text size={12} weight="bold" transform="uppercase" color="#ffffffAA">
-          Information Security Training Materials
-        </Text>
-        <Text h4 color="white">
-          信息安全培训资料 
-        </Text>
-      </Col>
-    </Card.Header>
-    <Card.Image
-      src="https://nextui.org/images/card-example-4.jpeg"
-      objectFit="cover"
-      width="100%"
-      height={340}
-      alt="Card image background"
-    />
+    <NextLink href="/training" passHref>
+      <Card.Header css={{ position: "absolute", zIndex: 1, top: 5 }}>
+        <Col>
+          <Text size={12} weight="bold" transform="uppercase" color="#ffffffAA">
+            Information Security Training Materials
+          </Text>
+          <Text h4 color="white">
+            信息安全培训资料
+          </Text>
+        </Col>
+      </Card.Header>
+      <Card.Image
+        src="https://nextui.org/images/card-example-4.jpeg"
+        objectFit="cover"
+        width="100%"
+        height={340}
+        alt="Card image background"
+      />
+    </NextLink>
   </Card>
+
 );
 
 const Card2 = () => (
   <Card isHoverable isPressable css={{ w: "100%" }}>
-    <Card.Header css={{ position: "absolute", zIndex: 1, top: 5 }}>
-      <Col>
-        <Text size={12} weight="bold" transform="uppercase" color="#ffffffAA">
-          Online assessment
-        </Text>
-        <Text h4 color="white">
-          在线考核
-        </Text>
-      </Col>
-    </Card.Header>
-    <Card.Image
-      src="https://nextui.org/images/card-example-3.jpeg"
-      width="100%"
-      height={340}
-      objectFit="cover"
-      alt="Card image background"
-    />
+    <NextLink href="/check" passHref>
+      <Card.Header css={{ position: "absolute", zIndex: 1, top: 5 }}>
+        <Col>
+          <Text size={12} weight="bold" transform="uppercase" color="#ffffffAA">
+            Online assessment
+          </Text>
+          <Text h4 color="white">
+            在线考核
+          </Text>
+        </Col>
+      </Card.Header>
+      <Card.Image
+        src="https://nextui.org/images/card-example-3.jpeg"
+        width="100%"
+        height={340}
+        objectFit="cover"
+        alt="Card image background"
+      />
+    </NextLink>
   </Card>
 );
 
