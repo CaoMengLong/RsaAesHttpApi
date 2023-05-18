@@ -73,10 +73,10 @@ export default function Header({ isActive }: HeaderProps) {
                     {session.user?.email}
                   </Text>
                 </Dropdown.Item>
-                {/* <Dropdown.Item key="settings" withDivider>
-                  My Settings
+                <Dropdown.Item key="settings" withDivider>
+                  系统管理
                 </Dropdown.Item>
-                <Dropdown.Item key="team_settings">Team Settings</Dropdown.Item>
+                {/* <Dropdown.Item key="team_settings">Team Settings</Dropdown.Item>
                 <Dropdown.Item key="analytics" withDivider>
                   Analytics
                 </Dropdown.Item>

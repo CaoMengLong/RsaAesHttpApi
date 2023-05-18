@@ -56,7 +56,7 @@ const Training: NextPage = () => {
                     title={<a href="https://ant.design">{item.title}</a>}
                     description={item.overview}
                   />
-                  <div style={{marginLeft:"2rem"}}><Button onClick={readBtn}>学习</Button></div>
+                  <div style={{marginLeft:"2rem"}}><Button onClick={readBtn}>开始学习</Button></div>
                 </List.Item>
               )}
             />
@@ -76,7 +76,7 @@ const Training: NextPage = () => {
                     title={<a href="https://ant.design">{item.title}</a>}
                     description={item.overview}
                   />
-                  <div style={{marginLeft:"2rem"}}><Button onClick={readBtn}>学习</Button></div>
+                  <div style={{marginLeft:"2rem"}}><Button onClick={readBtn}>开始学习</Button></div>
                 </List.Item>
               )}
             />
