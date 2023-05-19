@@ -1,19 +1,32 @@
-import { NextPage } from "next";
+import { GetServerSidePropsContext, GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
 import Head from "next/head";
 
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 
 import { Container } from "@nextui-org/react";
-import { Card, Collapse, Button, Divider, Badge,Result } from 'antd';
+import { Card, Collapse, Button, Divider, Badge, Result } from 'antd';
 import { useRouter } from 'next/router';
-
+import prisma from '../lib/prismadb';
+import { TestPaper } from "@prisma/client";
+import { getSession, signIn, useSession } from "next-auth/react";
 const { Panel } = Collapse;
 
-const Check: NextPage = () => {
+interface NextPageProps {
+  testPaperList: TestPaper[]
+  testPaperListEnd: TestPaper[]
+}
+
+const Check: NextPage<NextPageProps> = ({ testPaperList, testPaperListEnd }) => {
+  const { status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      signIn()
+    },
+  })
   const router = useRouter();
-  const readBtn = () => {
-    router.push('/checking');
+  const readBtn = (id: number) => {
+    router.push('/checking/' + id);
   }
 
   return (
@@ -26,30 +39,22 @@ const Check: NextPage = () => {
       <Container lg style={{ marginTop: "2rem", padding: "0px" }}>
         <Badge.Ribbon text="进行中" color="red">
           <Card hoverable title="进行中的测试" bordered={true} >
-            <Collapse size="large">
-              <Panel header="新员工信息安全学习测试" key="1">
-                <p>测试说明</p>
-                <p>测试说明</p>
-                <p>测试说明</p>
-                <p>测试说明</p>
-                <div style={{ textAlign: "right" }}>
-                  <Button type="primary" size="large" onClick={readBtn}>开始测试</Button>
-                </div>
-              </Panel>
-            </Collapse>
-            <Divider dashed />
-            <Collapse size="large">
-              <Panel header="「2023/06」软件研发中心・月度安全培训测试" key="2">
-                <p>测试说明</p>
-                <p>测试说明</p>
-                <p>测试说明</p>
-                <p>测试说明</p>
-                <div style={{ textAlign: "right" }}>
-                  <Button type="primary" size="large" onClick={readBtn}>开始测试</Button>
-                </div>
-              </Panel>
-            </Collapse>
-            <Divider dashed />
+            {testPaperList.length === 0 && (
+              <div>已经完成所有的测试</div>
+            )}
+            {testPaperList.map((testPaper, index) => (
+              <div key={index}>
+                <Collapse size="large">
+                  <Panel header={testPaper.title} key={index}>
+                    <p>{testPaper.description}</p>
+                    <div style={{ textAlign: "right" }}>
+                      <Button type="primary" size="large" onClick={() => readBtn(testPaper.id)}>开始测试</Button>
+                    </div>
+                  </Panel>
+                </Collapse>
+                <Divider dashed />
+              </div>
+            ))}
           </Card>
         </Badge.Ribbon>
       </Container>
@@ -58,17 +63,24 @@ const Check: NextPage = () => {
       <Container lg style={{ marginTop: "2rem", padding: "0px" }}>
         <Badge.Ribbon text="合格" color="green">
           <Card hoverable title="已经完成的测试" bordered={true} >
-            <Collapse size="large">
-              <Panel header="「2023/05」软件研发中心・月度安全培训测试" key="2">
-                
-                <Result
-                  status="success"
-                  title="已经通过测试"
-                  subTitle="2023/05/11 15:20"
-                />
-              </Panel>
-            </Collapse>
-            <Divider dashed />
+            {testPaperListEnd.length === 0 && (
+              <div>尚未有未完成的测试</div>
+            )}
+            {testPaperListEnd.map((testPaper, index) => (
+              <div key={index}>
+                <Collapse size="large">
+                  <Panel header={testPaper.title} key={index}>
+                    <Result
+                      status="success"
+                      title="已经通过测试"
+                      subTitle={testPaper.createdAt.toLocaleDateString()}
+                    />
+                  </Panel>
+                </Collapse>
+                <Divider dashed />
+              </div>
+            ))}
+
           </Card>
         </Badge.Ribbon>
       </Container>
@@ -77,6 +89,16 @@ const Check: NextPage = () => {
       <Footer />
     </div>
   );
+};
+
+export const getServerSideProps = async (context: GetServerSidePropsContext) => {
+  const session = await getSession(context) // awaitを忘れずに
+  const email = session?.user?.email || ""
+  const testPaperList = await prisma.$queryRaw<TestPaper[]>`SELECT * FROM public."TestPaper" where published = true and id not  in (SELECT "testId" FROM public."TestResult" WHERE "userId"=${email})`
+  const testPaperListEnd = await prisma.$queryRaw<TestPaper[]>`SELECT * FROM public."TestPaper" where published = true and id in (SELECT "testId" FROM public."TestResult" WHERE "userId"=${email})`
+  return {
+    props: { testPaperList, testPaperListEnd },
+  };
 };
 
 

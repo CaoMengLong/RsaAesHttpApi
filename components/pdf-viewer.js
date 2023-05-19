@@ -6,8 +6,8 @@ import workerSrc from "../pdf-worker";
 
 pdfjs.GlobalWorkerOptions.workerSrc = workerSrc;
 
-export default function PDFViewer() {
-  const [file, setFile] = useState("./sample.pdf");
+export default function PDFViewer({fileUrl}) {
+  const [file, setFile] = useState(fileUrl);
   const [numPages, setNumPages] = useState(null);
 
 
