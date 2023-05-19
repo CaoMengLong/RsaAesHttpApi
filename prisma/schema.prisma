@@ -52,3 +52,17 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
+
+// 业务表开始
+model Document {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String?
+  category    Int      @default(0)
+  fileUrl     String
+  fileType    Int      @default(0)
+  content     String?
+  published   Boolean @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
+}
