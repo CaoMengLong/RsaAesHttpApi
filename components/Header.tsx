@@ -26,7 +26,7 @@ export default function Header({ isActive }: HeaderProps) {
           </Text>
         </Navbar.Brand>
         <Navbar.Content hideIn="xs">
-          RSA+AES<br />HTTP通信加密
+          RSA+AES<br />HTTP通信加密<br />
         </Navbar.Content>
       </Navbar>
     </header>

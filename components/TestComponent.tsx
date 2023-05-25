@@ -6,14 +6,17 @@ const { TextArea } = Input;
 import AESUtil from "../utils/AESUtil";
 import RSAUtil from "../utils/RSAUtil";
 
-export default function TestComponent() {
+interface ITestComponentProps {
+  publicKey: string,
+}
 
+export default function TestComponent({ publicKey }: ITestComponentProps) {
   const [requestBody, setQequestBody] = useState("请输入需要发送的信息");
   const [responseBody, setResponseBody] = useState("");
   const [encryptBody, setEncryptBody] = useState("");
   const [decryptBody, setDecryptBody] = useState("");
   const [aesKey, setAesKey] = useState("");
-  const [rsaPublicKey, setRsaPublicKey] = useState("");
+  const [rsaPublicKey, setRsaPublicKey] = useState(publicKey);
   const [encryptedAesKey, setEncryptedAesKey] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -57,16 +60,6 @@ export default function TestComponent() {
 
   useEffect(() => {
     setAesKey(AESUtil.createAesKey())
-    var rsaPublicKey = `-----BEGIN PUBLIC KEY-----
-    MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAthpIjNeS9DrXI33AZXRK
-    PTQZDfq07rzpkBiiAsLDSl+cJx4gLdFzoB4PYDsNG5rleKJe/LYlWdXzen+Trthw
-    EKsLH2bLXn9FAGcWEmUWGorzgBrnzTUbhlRuroxK4aj5J7W/BdriQqfcLrylKOTg
-    +5pE9XfzhZe8237KqSmUbrguf+gxdMcBjPuz0hp22Lgj6TDUonCGYtfuyn7nl8dV
-    zD+NumFHf8pUTV0atg+sXWoR9AIxz8rZc32fVkEUr7cEYoWS6X65uXNED3Kafd1Q
-    EwFXJeBLTRW7kzMtdgvk0U+5W0CLtAKpk54/d1PPobJDaIh8MrA+0yVZhY8xZ5uC
-    LQIDAQAB
-    -----END PUBLIC KEY-----`;
-    setRsaPublicKey(rsaPublicKey)
   }, [])
   return (
     <div>
@@ -103,7 +96,7 @@ export default function TestComponent() {
                   <p>
                     HTTP请求的自定义Header内容:
                     <Tooltip title="※利用RSA公钥将ASE KEY加密后放入request.Header中。">
-                       <QuestionCircleOutlined rev={undefined} style={{marginLeft:"5px"}}/>
+                      <QuestionCircleOutlined rev={undefined} style={{ marginLeft: "5px" }} />
                     </Tooltip>
                   </p>
                   <Input addonBefore="REQUEST_KEY" value={encryptedAesKey} />
