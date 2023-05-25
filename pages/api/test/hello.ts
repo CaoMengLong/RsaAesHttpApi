@@ -1,6 +1,7 @@
 
 import prisma from "../../../lib/prismadb";
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { kv } from '@vercel/kv';
 import * as crypto from 'crypto';
 
 function aesDecrypt(encrypted: string, key: string): string {
@@ -36,27 +37,40 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse) 
 
   console.info("收到客户端发来的加密AesKey:", encryptedAesKey)
   console.info("收到客户端发来的加密RequestData:", requestData)
-  
-  const rsaKey = await prisma.rsaKey.findUnique({
-    where: {
-      id: 1,
+
+  let privateKey = ""
+  //从Redis获取缓存提高性能 
+  try {
+    const redisPrivateKey :string = await kv.get('privateKey') || ""
+    if (redisPrivateKey === "") {
+      const rsaKey = await prisma.rsaKey.findUnique({
+        where: {
+          id: 1,
+        }
+      });
+      console.info("缓存中Ras私钥不存在,从数据库中获取并写入缓存成功!")
+      await kv.set('privateKey', rsaKey?.privateKey , { ex: 100, nx: true });
+      privateKey = rsaKey?.privateKey || ""
+    } else {
+      console.log("从缓存中获取PrivateKey成功!");
+      privateKey = redisPrivateKey
     }
-  });
+  } catch (error) {
+    console.info("从缓存或者数据库中获取Rsa私钥失败.", error)
+  }
 
-  console.info("rsaKey",rsaKey)
-
-  if (rsaKey?.privateKey) {
-    var decryptedAesKey = rsaDecrypt(encryptedAesKey, rsaKey?.privateKey);
+  if (privateKey !== "") {
+    var decryptedAesKey = rsaDecrypt(encryptedAesKey, privateKey);
     console.info("解密AesKey:", decryptedAesKey)
     var decryptedData = aesDecrypt(requestData, decryptedAesKey);
     console.info("解密RequestData:", decryptedData)
     const responseData = {
-      resopnseData: aesEncrypt("Hello, " + decryptedData, decryptedAesKey)
+      responseData: aesEncrypt("Hello, " + decryptedData, decryptedAesKey)
     }
-    res.json(responseData);
+    return res.json(responseData);
   }
   const responseData = {
-    resopnseData: "RsaPrivateKey获取失败"
+    responseData: "RsaPrivateKey获取失败"
   }
-  res.json(responseData)
+  return res.json(responseData)
 }

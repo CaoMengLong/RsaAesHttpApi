@@ -1,7 +1,6 @@
 
 import NextImage from 'next/image';
-import { Navbar, Button, Link, Text, Card, Radio, Avatar, Dropdown, Loading } from "@nextui-org/react";
-
+import { Navbar, Text} from "@nextui-org/react";
 import { Key } from 'react';
 
 interface HeaderProps {
@@ -11,7 +10,6 @@ export default function Header({ isActive }: HeaderProps) {
   const onAction = (key: Key) => {
     switch (key) {
       case "logout":
-
         break;
       default:
         break;
@@ -22,15 +20,13 @@ export default function Header({ isActive }: HeaderProps) {
     <header>
       <Navbar isBordered variant="floating">
         <Navbar.Brand>
-          <NextImage src="/logo.svg" width={60} height={60} alt="LOGO" />
-          <Text b color="inherit" hideIn="xs">
-            探讨混合加密模型在HTTP数据传输中的应用
+          <NextImage src="/logo.png" width={60} height={30} alt="LOGO" />
+          <Text b color="inherit" hideIn="xs" style={{ marginLeft: "10px" }}>
+            探讨混合加密模型在HTTP数据传输中的应用 - 技术验证
           </Text>
         </Navbar.Brand>
         <Navbar.Content hideIn="xs">
-          <Navbar.Link {...(isActive === "index" ? { isActive: true } : {})} href="/">首页</Navbar.Link>
-          <Navbar.Link {...(isActive === "training" ? { isActive: true } : {})} href="/training">安全培训</Navbar.Link>
-          <Navbar.Link {...(isActive === "check" ? { isActive: true } : {})} href="/check">在线考核</Navbar.Link>
+          RSA+AES<br />HTTP通信加密
         </Navbar.Content>
       </Navbar>
     </header>

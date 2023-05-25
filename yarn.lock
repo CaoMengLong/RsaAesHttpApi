@@ -1557,7 +1557,7 @@
     "@upstash/core-analytics" "0.0.6"
     "@upstash/redis" "^1.20.1"
 
-"@upstash/redis@^1.19.1", "@upstash/redis@^1.19.3", "@upstash/redis@^1.20.1":
+"@upstash/redis@1.20.6", "@upstash/redis@^1.19.1", "@upstash/redis@^1.19.3", "@upstash/redis@^1.20.1":
   version "1.20.6"
   resolved "https://registry.yarnpkg.com/@upstash/redis/-/redis-1.20.6.tgz#3d5773f2b463b19f612b6373fe516e6200a1762d"
   integrity sha512-q1izaYEUsq/WiXNOjf4oOjFZe8fIeBSZN8d5cEyOD4nem+zxc4jccieorQQrNlEahKPE1ZYLzVEkMODRUfch2g==
@@ -1568,6 +1568,13 @@
   version "0.1.11"
   resolved "https://registry.yarnpkg.com/@vercel/analytics/-/analytics-0.1.11.tgz#727a0ac655a4a89104cdea3e6925476470299428"
   integrity sha512-mj5CPR02y0BRs1tN3oZcBNAX9a8NxsIUl9vElDPcqxnMfP0RbRc9fI9Ud7+QDg/1Izvt5uMumsr+6YsmVHcyuw==
+
+"@vercel/kv@^0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@vercel/kv/-/kv-0.2.1.tgz#f66bd79dd3ab14c83bcd09f2e4c0049b46f7ee25"
+  integrity sha512-0O1CVh0maG/bduAE6DPKUTfGSnORgrcS5xBYZCb62sOU7PrVZrXhaPbUSBE4q5PXS5DC+cpN6FY2RWNlslUaWQ==
+  dependencies:
+    "@upstash/redis" "1.20.6"
 
 "@webgpu/types@0.1.16":
   version "0.1.16"

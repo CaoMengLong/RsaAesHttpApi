@@ -14,7 +14,7 @@ ssr: false, // SSRの無効
 
 const Home: NextPage = () => {
   return (
-    <div>
+    <div style={{backgroundColor:"#efefef"}}>
       <Head>
         <title>探讨混合加密模型在HTTP数据传输中的应用</title>
       </Head>
