@@ -16,8 +16,9 @@ const Home: NextPage = () => {
   return (
     <div>
       <Head>
-        <title>企业信息安全教育系统</title>
+        <title>探讨混合加密模型在HTTP数据传输中的应用</title>
       </Head>
+      <Header isActive="index"/>
       <TestComponent/>
       <Footer />
     </div >
