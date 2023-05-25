@@ -1,15 +1,38 @@
-INSERT INTO public."Document"
-(id, title, description, category, "fileUrl", "fileType", "content", published, "createdAt", "updatedAt")
-VALUES(3, '新员工信息安全知识培训・基础安全知识', '新员工信息安全知识培训是一项至关重要的培训计划，旨在向新入职的员工传授基础的信息安全知识，确保他们在工作环境中能够理解和遵守公司的信息安全政策和最佳实践。本次培训的目标是帮助员工认识到信息安全的重要性，了解潜在的安全风险，并掌握保护个人和公司数据的基本技能。', 0, './sample.pdf', 0, NULL, true, '2023-05-19 00:44:07.281', '2023-05-19 00:43:58.356');
-INSERT INTO public."Document"
-(id, title, description, category, "fileUrl", "fileType", "content", published, "createdAt", "updatedAt")
-VALUES(4, '新员工信息安全知识培训・社内保密知识', '新员工信息安全知识培训的一部分是关于社内保密知识的培训，旨在向新入职员工传授与公司内部数据和信息保密相关的基础知识和最佳实践。本次培训的目标是帮助员工理解保密的重要性，熟悉公司的保密政策，并掌握保护机密信息的基本技能。', 0, './sample.pdf', 0, NULL, true, '2023-05-19 00:47:57.197', '2023-05-19 00:43:58.356');
-INSERT INTO public."Document"
-(id, title, description, category, "fileUrl", "fileType", "content", published, "createdAt", "updatedAt")
-VALUES(5, '新员工信息安全知识培训・社外保密知识', '新员工信息安全知识培训的一部分是关于社外保密知识的培训，旨在向新入职员工传授与公司对外交流和合作中保密相关的基础知识和最佳实践。本次培训的目标是帮助员工理解与外部合作伙伴和客户保密的重要性，掌握适当的保密措施，并了解泄露机密信息可能带来的风险。', 0, './sample.pdf', 0, NULL, true, '2023-05-19 00:47:57.338', '2023-05-19 00:43:58.356');
-INSERT INTO public."Document"
-(id, title, description, category, "fileUrl", "fileType", "content", published, "createdAt", "updatedAt")
-VALUES(6, '新员工信息安全知识培训・岗位安全知识', '新员工信息安全知识培训的一部分是关于岗位安全知识的培训，旨在向新入职员工传授与其具体岗位和工作职责相关的安全知识和最佳实践。本次培训的目标是帮助员工了解在其岗位上如何识别和应对安全风险，掌握岗位安全操作技巧，以确保工作环境的安全和数据的保护。', 0, './sample.pdf', 0, NULL, true, '2023-05-19 00:47:57.474', '2023-05-19 00:43:58.356');
-INSERT INTO public."Document"
-(id, title, description, category, "fileUrl", "fileType", "content", published, "createdAt", "updatedAt")
-VALUES(8, '「2023/06」软件研发中心・月度安全培训', '软件研发中心月度安全培训是一项定期举行的培训计划，旨在提高软件研发团队对安全问题的意识和技能，以保护软件和系统的安全性。本次培训的目标是向团队成员传授与软件研发过程中的安全相关知识，并介绍最佳实践，以减少潜在的安全风险和漏洞。', 0, './sample.pdf', 0, NULL, true, '2023-05-19 00:48:24.191', '2023-05-19 00:43:58.356');
+INSERT INTO public."RsaKey"
+(id, "publicKey", "privateKey")
+VALUES(1, '-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAthpIjNeS9DrXI33AZXRK
+PTQZDfq07rzpkBiiAsLDSl+cJx4gLdFzoB4PYDsNG5rleKJe/LYlWdXzen+Trthw
+EKsLH2bLXn9FAGcWEmUWGorzgBrnzTUbhlRuroxK4aj5J7W/BdriQqfcLrylKOTg
++5pE9XfzhZe8237KqSmUbrguf+gxdMcBjPuz0hp22Lgj6TDUonCGYtfuyn7nl8dV
+zD+NumFHf8pUTV0atg+sXWoR9AIxz8rZc32fVkEUr7cEYoWS6X65uXNED3Kafd1Q
+EwFXJeBLTRW7kzMtdgvk0U+5W0CLtAKpk54/d1PPobJDaIh8MrA+0yVZhY8xZ5uC
+LQIDAQAB
+-----END PUBLIC KEY-----', '-----BEGIN PRIVATE KEY-----
+MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC2GkiM15L0Otcj
+fcBldEo9NBkN+rTuvOmQGKICwsNKX5wnHiAt0XOgHg9gOw0bmuV4ol78tiVZ1fN6
+f5Ou2HAQqwsfZstef0UAZxYSZRYaivOAGufNNRuGVG6ujErhqPkntb8F2uJCp9wu
+vKUo5OD7mkT1d/OFl7zbfsqpKZRuuC5/6DF0xwGM+7PSGnbYuCPpMNSicIZi1+7K
+fueXx1XMP426YUd/ylRNXRq2D6xdahH0AjHPytlzfZ9WQRSvtwRihZLpfrm5c0QP
+cpp93VATAVcl4EtNFbuTMy12C+TRT7lbQIu0AqmTnj93U8+hskNoiHwysD7TJVmF
+jzFnm4ItAgMBAAECggEAdR3ATTyT2ZlCJiRJKba5zFUGTBRSazx6Jl+BSq9B9EI7
+ZnkcjvsnFvJeRzCTRI7BSG19E6B9syJDviPwskGnCUFIHQD6iKLnmNOzwU7cAWQe
+KOSk8jhWpHUG3iGCQ1FuNJjR6w0T+XSFylUvD3bsL0TPVuO3bdLh9nS8GEGSogWi
+lN62a28ULRjOpm0anD1Zpn8daUuGxhY3ebJUcia2gnLBmdvXptuDNmqwzGdn1Awp
+AybwtBOMm88tgsMIZJjVSN0dyiahtB12VULwPq0j9X4L/hLecNg3SptMBQqRgW6F
+MKDRl43kj58g56Gt3HJWrTa0Dm+HwWY3Gx2vhIZV4QKBgQDfnms5dWIKuwmJ2evT
+3joVkVLuVfxaGtsbbwFGiPMvpb7Ap4dHmFEEsFiCEDqXcw9EDqTH3b07aqRxVPEY
+EF0Wgyrh9BIUiTrF8BkpdH/lJO21Vc9ZJ9RZ+vCAsMgoBhDmjKDziYdFaTSblMu8
+nS55pm5i3bvcXnWCY/zphmVYOQKBgQDQeNrapg88gjFCTJukFPGN0yoFkELIA1MX
+yLu7VG0ZSQx1j2bso+i9Djz7rcHc9jwjSkeRUjdmcJzS0Ko6kHBiZFp/vfBMqnVy
+DLUjmW/Evm9DTi5gOIRkNSDPbMw3T/rM6J5nEe3fonYG/aKHPjaxqqYswsBR21nE
+WvgT/B5xlQKBgAmkgScnIqUnz498MCkgqgyICbVxS8Ju6gfSz5FFEod5dDJGhxTV
+QpkbKZXiMUSal4vtvblInIJVZOXmLcdF3V29Jjo8FhOAn2ItqkgZV/J/lyh8nMZR
+a1y972T9OoRPTqdCZSZbRdP+Z2BWGDr35CsmvBfTS+iCwjpvKVbAjtoxAoGAf/E7
+96akgTExxAu6FYhY+v6WspVnttL7gwRJ2t0km7kOMXQR6bdqleSQHrHz4YUpQUtM
+Au7fWzpPtL4lSw3sOyZ1uCI8wQB4Vcdgv/lh8/Af3sGzipAFCG7mtQaDiorGVE2L
+MZx6TZ6qKv4sai4PaRhfJedcGqCxReXCjJlVocUCgYEAtZpsDCLFT98inWsYBGl4
+eRkYQKVPhFuT4nAyy+kmjmuJ18nq/nd98zYrxxQMXWbpE58awwE5fMC692OOVSVt
+0BnN4wviLOd3//7XILm0EkcvUYNGsoAkrQna5keCEmHMYzjPstmwxXRxkZJuMxZm
+KEeGO9BVhdPE4f588egQYPw=
+-----END PRIVATE KEY-----');

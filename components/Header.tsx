@@ -8,9 +8,6 @@ interface HeaderProps {
   isActive: string
 }
 export default function Header({ isActive }: HeaderProps) {
-
-
-
   const onAction = (key: Key) => {
     switch (key) {
       case "logout":
