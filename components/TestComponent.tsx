@@ -1,6 +1,6 @@
 import { Container } from "@nextui-org/react";
-import { Alert, Button, Card, Col, Divider, Input, Row, Spin } from "antd";
-import { ArrowLeftOutlined, ArrowRightOutlined } from "@ant-design/icons";
+import { Alert, Button, Card, Col, Divider, Input, Row, Spin, Tooltip } from "antd";
+import { ArrowLeftOutlined, ArrowRightOutlined, QuestionCircleOutlined } from "@ant-design/icons";
 import { useCallback, useEffect, useState } from "react";
 const { TextArea } = Input;
 import AESUtil from "../utils/AESUtil";
@@ -100,8 +100,14 @@ export default function TestComponent() {
               <Col span={2} style={{ textAlign: "center", fontSize: "3rem", verticalAlign: "middles", lineHeight: "15rem" }}><ArrowRightOutlined rev={undefined} /></Col>
               <Col span={10}>
                 <Card title="Request" bordered={false}>
-                  <p>HTTP请求Header的自定义内容:</p>
+                  <p>
+                    HTTP请求的自定义Header内容:
+                    <Tooltip title="※利用RSA公钥将ASE KEY加密后放入request.Header中。">
+                       <QuestionCircleOutlined rev={undefined} style={{marginLeft:"5px"}}/>
+                    </Tooltip>
+                  </p>
                   <Input addonBefore="REQUEST_KEY" value={encryptedAesKey} />
+
                   <p>HTTP请求的BODY内容:</p>
                   <Input.TextArea rows={8} value={encryptBody} />
                   <div style={{ textAlign: "center", marginTop: "1rem" }}>
