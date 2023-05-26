@@ -41,7 +41,7 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse) 
   let privateKey = ""
   //从Redis获取缓存提高性能 
   try {
-    const redisPrivateKey :string = await kv.get('privateKey') || ""
+    const redisPrivateKey: string = await kv.get('privateKey') || ""
     if (redisPrivateKey === "") {
       const rsaKey = await prisma.rsaKey.findUnique({
         where: {
@@ -49,7 +49,7 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse) 
         }
       });
       console.info("缓存中Ras私钥不存在,从数据库中获取并写入缓存成功!")
-      await kv.set('privateKey', rsaKey?.privateKey , { ex: 100, nx: true });
+      await kv.set('privateKey', rsaKey?.privateKey, { ex: 86400000 });
       privateKey = rsaKey?.privateKey || ""
     } else {
       console.log("从缓存中获取PrivateKey成功!");

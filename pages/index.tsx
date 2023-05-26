@@ -40,7 +40,7 @@ export const getServerSideProps = async () => {
         }
       });
       console.info("缓存中Ras公钥不存在,从数据库中获取并写入缓存成功!")
-      await kv.set('publicKey', rsaKey?.publicKey, { ex: 100, nx: true });
+      await kv.set('publicKey', rsaKey?.publicKey, { ex: 86400000});
       publicKey = rsaKey?.publicKey || ""
     } else {
       console.log("从缓存中获取PublicKey成功!");
