@@ -1,5 +1,5 @@
 import { Container } from "@nextui-org/react";
-import { Alert, Button, Card, Col, Divider, Input, Row, Spin, Tooltip } from "antd";
+import { Alert, Button, Card, Col, Divider, Input, Row, Spin, Tooltip, notification } from "antd";
 import { ArrowLeftOutlined, ArrowRightOutlined, QuestionCircleOutlined } from "@ant-design/icons";
 import { useCallback, useEffect, useState } from "react";
 const { TextArea } = Input;
@@ -19,6 +19,19 @@ export default function TestComponent({ publicKey }: ITestComponentProps) {
   const [rsaPublicKey, setRsaPublicKey] = useState(publicKey);
   const [encryptedAesKey, setEncryptedAesKey] = useState("");
   const [loading, setLoading] = useState(false);
+
+
+  const openCreateAesKeyNotification = useCallback(() => {
+    notification.success({
+      message: 'AES密钥已经重新生成',
+      description:
+        '下一次请求时将会使用新的AES密钥。',
+      onClick: () => {
+        console.log('Notification Clicked!');
+      },
+    });
+  }, [])
+
 
   const toggle = (checked: boolean) => {
     setLoading(checked);
@@ -55,8 +68,9 @@ export default function TestComponent({ publicKey }: ITestComponentProps) {
     const respBody = JSON.parse(responseBody)
     const body = { responseData: AESUtil.decryptByECB(respBody.responseData, aesKey) }
     setDecryptBody(JSON.stringify(body))
+    setAesKey(AESUtil.createAesKey())
+    openCreateAesKeyNotification()
   }
-
 
   useEffect(() => {
     setAesKey(AESUtil.createAesKey())
@@ -68,7 +82,7 @@ export default function TestComponent({ publicKey }: ITestComponentProps) {
         <div style={{ marginBottom: "1rem" }}>
           <Card title="加密密钥" bordered={false} >
             <div>
-              ASE KEY  <TextArea rows={1} value={aesKey} />
+              AES KEY  <TextArea rows={1} value={aesKey} />
             </div>
             <div>
               RSA Public KEY  <TextArea rows={8} value={rsaPublicKey} />
