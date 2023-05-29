@@ -1,0 +1,16 @@
+datasource db {
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Rsa密钥保存表
+model RsaKey {
+  id         Int    @id @default(autoincrement())
+  publicKey  String
+  privateKey String
+}
